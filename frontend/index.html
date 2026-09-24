@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Tracker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/msal/2.38.3/msal-browser.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+    button { padding: 10px 16px; margin: 5px 0; cursor: pointer; }
+    input, select { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+    .txn { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .expense { color: #c0392b; }
+    .income { color: #27ae60; }
+    #app { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Finance Tracker</h1>
+
+  <div id="login-section">
+    <button id="loginBtn">Sign In</button>
+  </div>
+
+  <div id="app">
+    <p>Welcome, <span id="userName"></span> (<button id="logoutBtn">Sign Out</button>)</p>
+
+    <h3>Add Transaction</h3>
+    <input type="number" id="amount" placeholder="Amount">
+    <input type="text" id="category" placeholder="Category (e.g. Food)">
+    <select id="type">
+      <option value="expense">Expense</option>
+      <option value="income">Income</option>
+    </select>
+    <input type="text" id="description" placeholder="Description">
+    <button id="addBtn">Add Transaction</button>
+
+    <h3>Transactions</h3>
+    <div id="transactions"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
