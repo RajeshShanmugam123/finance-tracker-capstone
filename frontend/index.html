@@ -2,40 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finance Tracker</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/msal/2.38.3/msal-browser.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
-    button { padding: 10px 16px; margin: 5px 0; cursor: pointer; }
-    input, select { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
-    .txn { border-bottom: 1px solid #ddd; padding: 10px 0; }
-    .expense { color: #c0392b; }
-    .income { color: #27ae60; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #6a5af9 0%, #7c3aed 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      color: #1f1147;
+      font-size: 28px;
+    }
+    .subtitle {
+      color: #888;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+    button {
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    button:hover { background: #6a2fd6; }
+    #logoutBtn {
+      background: transparent;
+      color: #7c3aed;
+      border: 1px solid #7c3aed;
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+    #logoutBtn:hover { background: #f3edff; }
+    input, select {
+      padding: 10px 12px;
+      margin: 6px 0;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    input:focus, select:focus { outline: none; border-color: #7c3aed; }
+    h3 {
+      color: #1f1147;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      border-bottom: 2px solid #f0edfb;
+      padding-bottom: 8px;
+    }
+    .user-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7f5ff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #444;
+    }
+    .txn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-radius: 10px;
+      background: #fafafa;
+      margin-bottom: 8px;
+    }
+    .txn-info { font-size: 13px; color: #777; }
+    .amount { font-weight: 700; font-size: 16px; }
+    .expense { color: #e11d48; }
+    .income { color: #16a34a; }
     #app { display: none; }
+    #addBtn { width: 100%; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <h1>Finance Tracker</h1>
+  <div class="card">
+    <h1>💰 Finance Tracker</h1>
+    <p class="subtitle">Track your income and expenses securely</p>
 
-  <div id="login-section">
-    <button id="loginBtn">Sign In</button>
-  </div>
+    <div id="login-section">
+      <button id="loginBtn">Sign In with Microsoft</button>
+    </div>
 
-  <div id="app">
-    <p>Welcome, <span id="userName"></span> (<button id="logoutBtn">Sign Out</button>)</p>
+    <div id="app">
+      <div class="user-bar">
+        <span>👤 <span id="userName"></span></span>
+        <button id="logoutBtn">Sign Out</button>
+      </div>
 
-    <h3>Add Transaction</h3>
-    <input type="number" id="amount" placeholder="Amount">
-    <input type="text" id="category" placeholder="Category (e.g. Food)">
-    <select id="type">
-      <option value="expense">Expense</option>
-      <option value="income">Income</option>
-    </select>
-    <input type="text" id="description" placeholder="Description">
-    <button id="addBtn">Add Transaction</button>
+      <h3>Add Transaction</h3>
+      <input type="number" id="amount" placeholder="Amount (₹)">
+      <input type="text" id="category" placeholder="Category (e.g. Food, Rent, Salary)">
+      <select id="type">
+        <option value="expense">Expense</option>
+        <option value="income">Income</option>
+      </select>
+      <input type="text" id="description" placeholder="Description (optional)">
+      <button id="addBtn">+ Add Transaction</button>
 
-    <h3>Transactions</h3>
-    <div id="transactions"></div>
+      <h3>Recent Transactions</h3>
+      <div id="transactions"></div>
+    </div>
   </div>
 
   <script src="app.js"></script>

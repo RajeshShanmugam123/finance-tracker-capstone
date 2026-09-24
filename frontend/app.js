@@ -95,10 +95,12 @@ async function loadTransactions() {
   transactions.forEach(txn => {
     const div = document.createElement("div");
     div.className = "txn";
-    div.innerHTML = `
-      <strong class="${txn.type}">${txn.type === "expense" ? "-" : "+"}₹${txn.amount}</strong>
-      — ${txn.category} ${txn.description ? "(" + txn.description + ")" : ""}
-      <br><small>${new Date(txn.date).toLocaleString()}</small>
+        div.innerHTML = `
+      <div>
+        <div>${txn.category}${txn.description ? " · " + txn.description : ""}</div>
+        <div class="txn-info">${new Date(txn.date).toLocaleDateString()}</div>
+      </div>
+      <div class="amount ${txn.type}">${txn.type === "expense" ? "-" : "+"}₹${txn.amount}</div>
     `;
     container.appendChild(div);
   });
