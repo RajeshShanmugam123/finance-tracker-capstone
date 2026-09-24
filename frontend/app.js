@@ -89,13 +89,24 @@ async function loadTransactions() {
   });
   const transactions = await res.json();
 
+  // Calculate totals
+  let income = 0, expense = 0;
+  transactions.forEach(txn => {
+    if (txn.type === "income") income += txn.amount;
+    else expense += txn.amount;
+  });
+  document.getElementById("totalIncome").textContent = `₹${income}`;
+  document.getElementById("totalExpense").textContent = `₹${expense}`;
+  document.getElementById("totalBalance").textContent = `₹${income - expense}`;
+  document.getElementById("summary").style.display = "block";
+
   const container = document.getElementById("transactions");
   container.innerHTML = "";
 
   transactions.forEach(txn => {
     const div = document.createElement("div");
     div.className = "txn";
-        div.innerHTML = `
+    div.innerHTML = `
       <div>
         <div>${txn.category}${txn.description ? " · " + txn.description : ""}</div>
         <div class="txn-info">${new Date(txn.date).toLocaleDateString()}</div>

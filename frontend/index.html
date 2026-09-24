@@ -96,6 +96,29 @@
     .amount { font-weight: 700; font-size: 16px; }
     .expense { color: #e11d48; }
     .income { color: #16a34a; }
+    .stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.stat {
+  flex: 1;
+  background: #f7f5ff;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+.stat-label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f1147;
+}
     #app { display: none; }
     #addBtn { width: 100%; margin-top: 8px; }
   </style>
@@ -103,7 +126,24 @@
 <body>
   <div class="card">
     <h1>💰 Finance Tracker</h1>
-    <p class="subtitle">Track your income and expenses securely</p>
+        <p class="subtitle">Track your income and expenses securely</p>
+
+    <div id="summary" style="display:none;">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Income</div>
+          <div class="stat-value income" id="totalIncome">₹0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Expenses</div>
+          <div class="stat-value expense" id="totalExpense">₹0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Balance</div>
+          <div class="stat-value" id="totalBalance">₹0</div>
+        </div>
+      </div>
+    </div>
 
     <div id="login-section">
       <button id="loginBtn">Sign In with Microsoft</button>
