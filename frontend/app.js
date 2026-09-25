@@ -8,7 +8,7 @@ const msalConfig = {
 };
 
 const apiScope = "api://d8b8cba2-48d8-4331-8974-df5c0295faef/access_as_user";
-const apiBaseUrl = "https://rs-finance-func-28873.azurewebsites.net/api";
+const apiBaseUrl = "https://finance-func-app.azurewebsites.net/api";
 
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let currentAccount = null;
