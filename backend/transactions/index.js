@@ -33,7 +33,7 @@ function validateToken(authHeader) {
     const token = authHeader.substring(7);
 
     jwt.verify(token, getSigningKey, {
-      audience: `api://${BACKEND_APP_ID}`,
+      audience: [`api://${BACKEND_APP_ID}`, BACKEND_APP_ID],
       issuer: `https://login.microsoftonline.com/${TENANT_ID}/v2.0`
     }, (err, decoded) => {
       if (err) return reject(err);
